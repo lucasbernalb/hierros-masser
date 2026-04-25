@@ -66,7 +66,7 @@ export default function Navbar() {
             }}
           >
             <Image
-              src="/whatsapp-icon.png"
+              src="/whatsapp-icon.svg"
               alt="WhatsApp"
               width={16}
               height={16}
