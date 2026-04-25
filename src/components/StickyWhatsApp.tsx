@@ -28,7 +28,7 @@ export default function StickyWhatsApp() {
       aria-label="Contactar por WhatsApp"
     >
       <Image
-        src="/whatsapp-icon.png?2024"
+        src="/whatsapp-icon.png"
         alt="WhatsApp"
         width={28}
         height={28}
