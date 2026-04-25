@@ -1,0 +1,82 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+
+const WHATSAPP_NUMBER = "59894729199"; // Replace with actual number
+
+export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+    };
+    
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
+        scrolled 
+          ? "bg-negro/80 backdrop-blur-md border-b border-gris-800/50" 
+          : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 sm:px-8">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo + Brand - Left aligned */}
+          <Link 
+            href="/" 
+            className="flex items-center gap-3 transition-transform duration-300 hover:scale-[1.02]"
+          >
+            <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-lg overflow-hidden">
+              <Image
+                src="/logo.PNG"
+                alt="Hierros Masser"
+                fill
+                className="object-contain"
+                sizes="44px"
+                priority
+              />
+            </div>
+            <span className="text-blanco font-display text-lg sm:text-xl font-light tracking-wide">
+              Hierros Masser
+            </span>
+          </Link>
+
+          {/* WhatsApp CTA - Right aligned, discrete but visible */}
+          <a
+            href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20sus%20productos.`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-sm text-sm font-medium text-gris-300 transition-all duration-300 ${
+              scrolled 
+                ? "bg-gris-800/60 hover:bg-naranja-600 hover:text-blanco" 
+                : "bg-gris-800/40 hover:bg-naranja-600 hover:text-blanco"
+            }`}
+            style={{
+              backgroundColor: scrolled ? 'rgba(38, 38, 38, 0.6)' : 'rgba(38, 38, 38, 0.4)'
+            }}
+          >
+            <svg
+              className="w-4 h-4"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.66-1.596-1.08-2.223-.364-.546-.614-.707-.854-.707-.198-.005-.42-.003-.64-.003-.248 0-.497.002-.712.005-.249.004-.497.099-.714.272-.174.149-.447.347-.447.596v.1c0 .198.099.348.27.474.174.149.347.298.52.447.174.149.347.298.52.447.149.149.248.298.347.496.099.198.05.346.025.52-.075.174-.175.347-.27.472-.099.124-.274.347-.397.52-.124.174-.274.248-.472.248-.198 0-.397-.003-.595-.075-.198-.074-.397-.174-.595-.347-.174-.149-.446-.372-.595-.496-.149-.124-.347-.173-.52-.149-.174.025-.397.099-.595.347-.198.249-1.08 1.223-1.08 1.223s-.892.347-1.223.521c-.33.174-.595.372-.852.52-.248.149-.595.323-.85.421-.05.02-.198.074-.297.099-.248.075-.595.149-1.223.124-1.223-.025-2.39-.795-2.864-2.47-.472-1.672.645-3.333 1.453-3.979 1.594-1.273 3.48-1.223 4.03-1.223.148 0 .347.025.52.074.174.05.347.099.52.198.174.099.347.248.52.421.174.174.297.397.421.595.124.198.198.421.248.595.05.174.025.372-.025.546-.074.248-.124.595-.074.852.049.258.173.52.347.745.174.224.421.447.646.62.224.174.495.347.771.446.297.099.595.174.92.124.347-.05.695-.124 1.048-.347.347-.224 1.223-.744 1.223-.744s.124-.074.347-.198c.224-.124.446-.224.595-.347.174-.149.247-.272.322-.421.074-.174.099-.372.074-.595-.025-.224-.124-.52.347-.991.595-.595 1.223-1.223 1.328-1.472.124-.174.173-.347.173-.595 0-.248-.124-.546-.347-.744-.248-.224-.645-.347-.92-.347-.274 0-.546.074-.771.173-.224.099-.447.224-.644.347-.198.124-.42.297-.595.495-.174.198-.322.42-.347.546-.025.124-.025.248 0 .347.049.173.173.595.595 1.173.42.579 1.052 1.322 1.9 1.796 1.223.695 2.568.744 3.48.496.744-.199 1.273-1.223 1.393-1.596.124-.372.124-.82-.099-1.173z" />
+            </svg>
+            <span className="hidden sm:inline">WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+  );
+}
