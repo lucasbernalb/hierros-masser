@@ -1,17 +1,8 @@
 import Hero from "@/components/Hero";
-import Trust from "@/components/Trust";
-import Gallery from "@/components/Gallery";
-import Process from "@/components/Process";
-import FinalCTA from "@/components/FinalCTA";
+import Lamps from "@/components/Lamps";
+import Oficio from "@/components/Oficio";
+import Contact from "@/components/Contact";
 
 export default function Home() {
-  return (
-    <>
-      <Hero />
-      <Trust />
-      <Gallery />
-      <Process />
-      <FinalCTA />
-    </>
-  );
+  return (<><Hero /><Lamps /><Oficio /><Contact /></>);
 }
